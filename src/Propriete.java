@@ -1,4 +1,3 @@
-import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
 
 public abstract class Propriete extends Case implements Subject {

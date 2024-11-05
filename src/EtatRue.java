@@ -1,5 +1,3 @@
-
-
 public abstract class EtatRue {
 
     public void joueurArrive(final Personnage joueur) {
