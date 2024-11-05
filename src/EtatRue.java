@@ -1,26 +1,26 @@
 public abstract class EtatRue {
 
-    public void joueurArrive(final Personnage joueur) {
+    protected Rue rue;
+
+    public EtatRue(Rue rue) {
+        this.rue = rue;
     }
 
-
-    public void avancer(final Case case, final int nb) {
+    public void joueurArrive(Personnage joueur) {
+        // Actions à définir dans les sous-classes en fonction de l’état
     }
-
 
     public void notifier() {
+        rue.notifier(); // Notifie l'observateur via la rue
     }
-
 
     public void devientConstructible() {
+        // Par défaut, ne fait rien ; chaque état spécifique gère sa constructibilité
     }
 
-
-    public void estProprietaire(final Personnage joueur) {
+    public boolean estProprietaire(Personnage joueur) {
+        return rue.estProprietaire(joueur);
     }
 
-
-    public void construire() {
-    }
-
+    public abstract double calculLoyer();
 }

@@ -1,20 +1,21 @@
-
+import java.util.Random;
 
 public class Des {
 
-    public int des1;
-
-
-    public int de2;
-
+    private int des1;
+    private int des2;
+    private Random random = new Random();
 
     public void lancerDes() {
+        des1 = random.nextInt(6) + 1;
+        des2 = random.nextInt(6) + 1;
     }
-
 
     public int getTotalDes() {
-        // TODO Auto-generated return
-        return 0;
+        return des1 + des2;
     }
 
+    public boolean estDouble() {
+        return des1 == des2;
+    }
 }

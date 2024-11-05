@@ -1,9 +1,4 @@
-
 public interface Subject {
-
     void notifier();
-
-
-    void atache();
-
+    void attache(Quartier quartier);
 }

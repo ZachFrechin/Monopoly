@@ -1,63 +1,60 @@
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 public class Personnage {
 
-    public double argent;
+    private String nom;
+    private double argent = 1500; // Montant de départ
+    private Case position;
+    private List<Propriete> mesProprietes = new ArrayList<>();
 
-
-    public List<Propriete> mesProprietes = new ArrayList<Propriete> ();
-
-
-    public void setPosition(final Case case) {
+    public Personnage(String nom) {
+        this.nom = nom;
     }
 
-
-    public void jouerTour(final Des des) {
+    public String getNom() {
+        return nom;
     }
 
-
-    public void acheter() {
+    public boolean peutJouer() {
+        return argent > 0;
     }
 
-    public void proposerAchat(final Propriete bien) {
+    public List<Propriete> getMesProprietes() {
+        return mesProprietes;
     }
 
-
-    public void payer(final int somme) {
+    public void setPosition(Case caseNouvelle) {
+        this.position = caseNouvelle;
     }
 
-    public void nouvellePropriete(final Propriete bien) {
+    public void jouerTour(Des des) {
+        des.lancerDes();
+        int deplacement = des.getTotalDes();
+        position = position.avancer(deplacement);
+        position.joueurArrive(this);
     }
 
-
-    public void finDeTour() {
+    public boolean proposerAchat(Propriete propriete) {
+        return argent >= propriete.getPrix();
     }
 
-
-    public void lancerDes() {
+    public void payer(double somme) {
+        argent -= somme;
+        if (argent < 0) {
+            System.out.println(nom + " est en faillite !");
+        }
     }
 
-
-    public void Operation() {
+    public void nouvellePropriete(Propriete propriete) {
+        mesProprietes.add(propriete);
     }
 
-
-    public void getPosition() {
+    public void crediter(double montant) {
+        argent += montant;
     }
 
-
-    public void loyerPayable(final double montant) {
+    public void debiter(double montant) {
+        argent -= montant;
     }
-
-
-    public void debiter(final double montant) {
-    }
-
-
-    public void crediter(final double montant) {
-    }
-
 }

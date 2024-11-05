@@ -1,20 +1,28 @@
+import java.util.ArrayList;
+import java.util.List;
 
 public class Quartier implements Observer {
 
-    public Propriete propriete;
+    private List<Propriete> proprietes = new ArrayList<>();
 
-
-    public void estConstructible() {
+    public void ajouterPropriete(Propriete propriete) {
+        proprietes.add(propriete);
+        propriete.attache(this);
     }
 
-
-    public int nbProprietesParJoueur(final Personnage personnage) {
-        // TODO Auto-generated return
-        return 0;
-    }
-
-
+    @Override
     public void update() {
+        System.out.println("Mise à jour du quartier : vérification des propriétés détenues.");
+        // Vérification de la possession complète et ajustement d'état pour la constructibilité si nécessaire
     }
 
+    public int getNbProprietesDetenues(Propriete propriete) {
+        int count = 0;
+        for (Propriete p : proprietes) {
+            if (p.estProprietaire(propriete.getProprietaire())) {
+                count++;
+            }
+        }
+        return count;
+    }
 }
