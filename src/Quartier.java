@@ -3,12 +3,19 @@ import java.util.List;
 
 public class Quartier implements Observer {
 
+    private String nom;
     private List<Propriete> proprietes = new ArrayList<>();
+
+
+    public Quartier(String nom) {
+        this.nom = nom;
+    }
 
     public void ajouterPropriete(Propriete propriete) {
         proprietes.add(propriete);
         propriete.attache(this);
     }
+
 
     @Override
     public void update() {

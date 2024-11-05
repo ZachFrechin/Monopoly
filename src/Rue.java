@@ -1,11 +1,16 @@
 public class Rue extends Propriete {
 
+    private String nom;
     private int loyer;
     private int prixMaison;
     private int loyerMaison;
     private int loyerHotel;
     private EtatRue etatRue;
 
+
+    public String getNom() {
+        return nom;
+    }
     public int getLoyerMaison() {
         return loyerMaison;
     }
@@ -19,7 +24,8 @@ public class Rue extends Propriete {
         // TODO Auto-generated method stub
     }
 
-    public Rue(int loyer, int prixMaison, int loyerMaison, int loyerHotel) {
+    public Rue(String nom, int loyer, int prixMaison, int loyerMaison, int loyerHotel) {
+        this.nom = nom;
         this.loyer = loyer;
         this.prixMaison = prixMaison;
         this.loyerMaison = loyerMaison;
@@ -37,18 +43,7 @@ public class Rue extends Propriete {
 
     @Override
     public void joueurArrive(Personnage joueur) {
-        if (!etatRue.estProprietaire(joueur)) { // Rue non achetée par ce joueur
-            if (joueur.proposerAchat(this)) {
-                joueur.payer(getPrix());
-                joueur.nouvellePropriete(this);
-                System.out.println(joueur.getNom() + " a acheté " + this);
-                notifier(); // Notifie que la propriété a été achetée
-            }
-        } else { // Rue déjà achetée par un autre joueur
-            double loyer = etatRue.calculLoyer();
-            joueur.payer(loyer);
-            System.out.println(joueur.getNom() + " a payé un loyer de " + loyer);
-        }
+        etatRue.joueurArrive(joueur);
     }
 
     public void setEtat(EtatRue etat) {

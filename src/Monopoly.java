@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Monopoly {
 
@@ -18,12 +19,19 @@ public class Monopoly {
     }
 
     public void creerJoueur(String name) {
-        joueurs.add(new Personnage(name));
+        joueurs.add(new Personnage(name, plateau.getCaseDepart()));
     }
 
     public void initJeu(final int nbj) {
-        for (int i = 1; i <= nbj; i++) {
-            creerJoueur("Joueur" + i);
+                
+        Scanner scanner = new Scanner(System.in);
+        String input;
+
+        // Boucle
+        for(int i = 0; i < nbj; i++) {
+            System.out.println("Entrez le nom du Joueur " + i);
+            input = scanner.nextLine();
+            creerJoueur(input);
         }
         joueurCourant = 0;
     }
@@ -34,6 +42,9 @@ public class Monopoly {
             if (joueur.peutJouer()) {
                 joueur.jouerTour(des);
             }
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Passer à l'étape suivante >>>");
+            scanner.nextLine();
             setJoueurCourant();
         }
         System.out.println("Partie terminée ! Le gagnant est : " + joueurs.get(joueurCourant).getNom());

@@ -6,6 +6,7 @@ public class EtatAcheter extends EtatRue {
 
     @Override
     public void joueurArrive(Personnage joueur) {
+        System.out.println(joueur.getNom() + " est sur une rue : " + rue.getNom());
         if (!rue.estProprietaire(joueur)) {
             double loyer = calculLoyer();
             joueur.payer(loyer);

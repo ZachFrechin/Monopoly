@@ -1,10 +1,8 @@
-import java.util.ArrayList;
-import java.util.List;
 
 public abstract class Propriete extends Case implements Subject {
 
     protected Personnage proprietaire;
-    protected List<Quartier> quartiers = new ArrayList<>();
+    protected Quartier quartier;
 
     public Personnage getProprietaire() {
         return proprietaire;
@@ -16,21 +14,20 @@ public abstract class Propriete extends Case implements Subject {
 
     @Override
     public void attache(Quartier quartier) {
-        quartiers.add(quartier);
+        this.quartier = quartier;
     }
 
     @Override
     public void notifier() {
-        for (Quartier quartier : quartiers) {
-            quartier.update();
-        }
+        this.quartier.update();
     }
 
     public Observer getObserveur() {
-        return quartiers.isEmpty() ? null : quartiers.get(0); // Retourne le premier observateur par défaut
+        return quartier; // Retourne le premier observateur par défaut
     }
 
     public boolean estProprietaire(Personnage joueur) {
+        if(joueur == null) return false;
         return joueur.getMesProprietes().contains(this);
     }
 

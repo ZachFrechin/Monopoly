@@ -6,7 +6,15 @@ public class EtatLibre extends EtatRue {
 
     @Override
     public void joueurArrive(Personnage joueur) {
-        System.out.println("Cette rue est libre. Le joueur peut choisir de l'acheter.");
+        System.out.println(joueur.getNom() + " est sur une rue : " + rue.getNom());
+        if (joueur.proposerAchat(rue)) {
+            joueur.payer(rue.getPrix());
+            joueur.nouvellePropriete(rue);
+            
+            System.out.println(joueur.getNom() + " a acheté " + rue.getNom());
+            rue.setEtat(new EtatAcheter(rue));
+            notifier(); // Notifie que la propriété a été achetée
+        }
     }
 
     @Override
