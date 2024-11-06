@@ -32,6 +32,11 @@ public class Personnage {
         return argent > 0;
     }
 
+    public boolean soldeSuffisant(int montant) {
+        // Vérifie si le joueur possède au moins le montant donné
+        return (this.argent >= montant);
+    }
+
     public void construire(Monopoly jeu) {
         MenuConstruction mc = new MenuConstruction(this);
         mc.loop(jeu);
@@ -54,7 +59,8 @@ public class Personnage {
     }
 
     public boolean proposerAchat(Propriete propriete) {
-        return argent >= propriete.getPrix();
+        MenuAchat ma = new MenuAchat(propriete.getNom());
+        return (ma.getChoix() == 1);
     }
 
     public void payer(double somme) {

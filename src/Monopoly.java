@@ -84,7 +84,7 @@ public class Monopoly {
         // Démo : Tomber sur un terrain acheté
         initJeuDemos();
         Personnage j1 = joueurs.get(joueurCourant);
-        Rue r = (Rue) plateau.getCaseDepart().getCaseSuivante();
+        Rue r = (Rue) plateau.getCase("Boulevard de Belleville");
         j1.nouvellePropriete(r);
         r.setEtat(new EtatAcheter(r));
         this.setJoueurCourant(); // Passer au joueur suivant pour le tour de jeu de la démo
@@ -96,16 +96,27 @@ public class Monopoly {
         // Démo : Acheter un terrain pour obtenir un quartier complet
         initJeuDemos();
         Personnage j1 = joueurs.get(joueurCourant);
-        Case BlvBelleville = plateau.getCaseDepart().getCaseSuivante();
-        Rue RueLecourbe = (Rue) BlvBelleville.getCaseSuivante().getCaseSuivante(); // Step de 2
+        Case BlvBelleville = plateau.getCase("Boulevard de Belleville");
+        Rue RueLecourbe = (Rue) plateau.getCase("Rue Lecourbe");
         j1.nouvellePropriete(RueLecourbe);
         RueLecourbe.setEtat(new EtatAcheter(RueLecourbe));
         m.loop(this);
     }
 
     public void demo5() {
-        // Démo : Démo : Tomber sur un terrain acheté, dans un quartier entièrement possédé par le même joueur 
-        // TODO
+        MenuDemo m = new MenuDemo();
+        // Démo : Tomber sur un terrain acheté, dans un quartier entièrement possédé par le même joueur 
+        initJeuDemos();
+        Personnage j1 = joueurs.get(joueurCourant);
+        Rue BlvBelleville = (Rue) plateau.getCase("Boulevard de Belleville");
+        Rue RueLecourbe = (Rue) plateau.getCase("Rue Lecourbe"); // Step de 2
+        j1.nouvellePropriete(BlvBelleville);
+        j1.nouvellePropriete(RueLecourbe);
+
+        RueLecourbe.setEtat(new EtatAcheter(RueLecourbe));
+        BlvBelleville.setEtat(new EtatAcheter(BlvBelleville));
+        this.setJoueurCourant();
+        m.loop(this);
     }
 
     public void demo6() {
@@ -114,8 +125,18 @@ public class Monopoly {
     }
 
     public void demo7() {
+        MenuDemo m = new MenuDemo();
         // Démo : Tomber sur une des gares possédées par un joueur
-        // TODO
+        initJeuDemos();
+        Personnage j1 = joueurs.get(joueurCourant);
+        Personnage j2 = joueurs.get((joueurCourant + 1) % joueurs.size());
+        Gare gareMontparnasse = (Gare) plateau.getCase("Gare Montparnasse");
+        Gare gareDeLyon = (Gare) plateau.getCase("Gare de Lyon");
+        j1.nouvellePropriete(gareMontparnasse);
+        j1.nouvellePropriete(gareDeLyon);
+        j2.setPosition(plateau.getCase("Rue Lecourbe"));
+        this.setJoueurCourant();
+        m.loop(this);
     }
 
     public void demo8() {

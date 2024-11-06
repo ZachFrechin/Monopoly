@@ -7,13 +7,22 @@ public class EtatLibre extends EtatRue {
     @Override
     public void joueurArrive(Personnage joueur) {
         System.out.println(joueur.getNom() + " est sur une rue : " + rue.getNom());
-        if (joueur.proposerAchat(rue)) {
-            System.out.println(joueur.getNom() + " a acheté " + rue.getNom());
-            joueur.payer(rue.getPrix());
-            joueur.nouvellePropriete(rue);
-            rue.setEtat(new EtatAcheter(rue));
-            notifier(); // Notifie que la propriété a été achetée
+        if (joueur.soldeSuffisant(rue.getPrix())) {
+            if (joueur.proposerAchat(rue)) {
+                System.out.println(joueur.getNom() + " a acheté " + rue.getNom());
+                joueur.payer(rue.getPrix());
+                joueur.nouvellePropriete(rue);
+                this.devientAcheter();
+            }
+        } else {
+            System.out.println("Solde insuffisant pour acheter la propriété");
         }
+    }
+
+    public void devientAcheter() {
+        rue.setEtat(new EtatAcheter(rue));
+        notifier();
+        System.out.println(rue.getNom() + " est maintenant achetée.");
     }
 
     @Override

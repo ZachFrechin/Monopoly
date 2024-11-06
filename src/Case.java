@@ -12,6 +12,10 @@ public class Case {
         return this.caseSuivante;
     }
 
+    public String getNom() {
+        return this.nom;
+    }
+
     public Case avancer(int nbCase, Personnage joueur) {
         Case currentCase = this;
         for (int i = 0; i < nbCase; i++) {

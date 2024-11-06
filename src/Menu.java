@@ -44,7 +44,7 @@ public abstract class Menu {
         }
     }
 
-    private int getChoix() {
+    protected int getChoix() {
         String input;
         Scanner scanner = new Scanner(System.in);
         Integer choix = null;

@@ -218,6 +218,16 @@ public class Plateau {
         cases.get(cases.size() - 1).setCaseSuivante(caseDepart);
     }
 
+    public Case getCase(String nom) {
+        Case rCase = null;
+        for (Case c : this.cases ) {
+            if (c.getNom() == nom) {
+                rCase = c;
+            }
+        }
+        return rCase;
+    }
+
     public Case getCaseDepart() {
         return caseDepart;
     }
