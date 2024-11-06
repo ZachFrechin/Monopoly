@@ -1,10 +1,11 @@
 public class Service extends Propriete {
 
-    private int prix = 150;
+    private int prix;
     private String nom;
 
-    public Service(String nom) {
+    public Service(String nom, int prix) {
         this.nom = nom;
+        this.prix = prix;
     }
 
     @Override

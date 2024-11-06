@@ -11,6 +11,14 @@ public class Quartier implements Observer {
         this.nom = nom;
     }
 
+    public List<Propriete> getProprietes() {
+        return this.proprietes;
+    }
+
+    public String getNom() {
+        return this.nom;
+    }
+
     public void ajouterPropriete(Propriete propriete) {
         proprietes.add(propriete);
         propriete.attache(this);
@@ -19,8 +27,16 @@ public class Quartier implements Observer {
 
     @Override
     public void update() {
-        System.out.println("Mise à jour du quartier : vérification des propriétés détenues.");
         // Vérification de la possession complète et ajustement d'état pour la constructibilité si nécessaire
+        if (getNbProprietesDetenues(this.proprietes.get(0)) == this.proprietes.size()) {
+            // Toutes les propriétés appartiennent au même joueur
+            for (Propriete p : this.proprietes) {
+                if (p instanceof Rue) {
+                    Rue rue = (Rue) p;  // Cast sécurisé
+                    rue.getEtatRue().devientConstructible();
+                }
+            }
+        }
     }
 
     public int getNbProprietesDetenues(Propriete propriete) {

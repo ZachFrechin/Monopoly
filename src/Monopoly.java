@@ -14,6 +14,14 @@ public class Monopoly {
         gererToursDeJeu();
     }
 
+    public Des getDes() {
+        return this.des;
+    }
+
+    public Personnage getJoueurCourant() {
+        return this.joueurs.get(joueurCourant);
+    }
+
     public void setJoueurCourant() {
         joueurCourant = (joueurCourant + 1) % joueurs.size();
     }
@@ -36,15 +44,20 @@ public class Monopoly {
         joueurCourant = 0;
     }
 
+    public void initJeuDemos() {
+        creerJoueur("Joueur 1");
+        creerJoueur("Joueur 2");
+        joueurCourant = 0;
+    }
+
     public void gererToursDeJeu() {
+        MenuTour mt = new MenuTour();
         while (!finPartie()) {
             Personnage joueur = joueurs.get(joueurCourant);
             if (joueur.peutJouer()) {
-                joueur.jouerTour(des);
+                mt.setTitle("Menu Tour de Jeu - " + joueur.getNom());
+                mt.loop(this);
             }
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Passer à l'étape suivante >>>");
-            scanner.nextLine();
             setJoueurCourant();
         }
         System.out.println("Partie terminée ! Le gagnant est : " + joueurs.get(joueurCourant).getNom());
@@ -56,5 +69,77 @@ public class Monopoly {
             if (joueur.peutJouer()) joueursActifs++;
         }
         return joueursActifs <= 1;
+    }
+
+    // ---- DEMOS METHODS ----
+    public void demo2() {
+        MenuDemo m = new MenuDemo();
+        // Démo : Tomber sur un terrain libre
+        initJeuDemos();
+        m.loop(this);
+    }
+
+    public void demo3() {
+        MenuDemo m  = new MenuDemo();
+        // Démo : Tomber sur un terrain acheté
+        initJeuDemos();
+        Personnage j1 = joueurs.get(joueurCourant);
+        Rue r = (Rue) plateau.getCaseDepart().getCaseSuivante();
+        j1.nouvellePropriete(r);
+        r.setEtat(new EtatAcheter(r));
+        this.setJoueurCourant(); // Passer au joueur suivant pour le tour de jeu de la démo
+        m.loop(this);
+    }
+
+    public void demo4() {
+        MenuDemo m = new MenuDemo();
+        // Démo : Acheter un terrain pour obtenir un quartier complet
+        initJeuDemos();
+        Personnage j1 = joueurs.get(joueurCourant);
+        Case BlvBelleville = plateau.getCaseDepart().getCaseSuivante();
+        Rue RueLecourbe = (Rue) BlvBelleville.getCaseSuivante().getCaseSuivante(); // Step de 2
+        j1.nouvellePropriete(RueLecourbe);
+        RueLecourbe.setEtat(new EtatAcheter(RueLecourbe));
+        m.loop(this);
+    }
+
+    public void demo5() {
+        // Démo : Démo : Tomber sur un terrain acheté, dans un quartier entièrement possédé par le même joueur 
+        // TODO
+    }
+
+    public void demo6() {
+        // Démo : Construire dans un quartier possédé
+        // TODO
+    }
+
+    public void demo7() {
+        // Démo : Tomber sur une des gares possédées par un joueur
+        // TODO
+    }
+
+    public void demo8() {
+        // Démo : Tomber sur une des compagnies possédées par un joueur
+        // TODO
+    }
+
+    public void demo9() {
+        // Démo : Passer par la case Départ
+        // TODO
+    }
+
+    public void demo10() {
+        // Démo : Tomber sur une case Taxe
+        // TODO
+    }
+
+    public void demo11() {
+        // Démo : Tomber sur un terrain libre, sans pouvoir l'acheter
+        // TODO
+    }
+
+    public void demo12() {
+        // Démo : Tomber sur un terrain acheté, sans pouvoir payer
+        // TODO
     }
 }

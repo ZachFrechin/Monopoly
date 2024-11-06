@@ -9,6 +9,7 @@ public class Plateau {
 
     public Plateau() {
         genererCases();
+        System.out.println("Fin génération cases");
     }
 
     private void genererCases() {
@@ -37,74 +38,177 @@ public class Plateau {
         quartiers.add(services);
 
         // Case de départ
-        caseDepart = new Depart();
+        caseDepart = new Case();
         cases.add(caseDepart);
 
         // Ajout des cases du vrai Monopoly
 
-        // Groupe marron
-        Rue boulevardDeBelleville = new Rue("Boulevard de Belleville", 60, 50, 10, 100);
-        Rue rueLecourbe = new Rue("Rue Lecourbe", 60, 50, 10, 100);
-        marron.ajouterPropriete(boulevardDeBelleville);
-        marron.ajouterPropriete(rueLecourbe);
-        cases.add(boulevardDeBelleville);
+        // Debut Quartier Marron
+        Rue BoulevardDeBelleville = new Rue("Boulevard de Belleville", 60, 2, 50, 200);
+        marron.ajouterPropriete(BoulevardDeBelleville);
+        cases.add(BoulevardDeBelleville);
+
+        // Case Fortune
         cases.add(new Fortune());
-        cases.add(rueLecourbe);
-        cases.add(new Taxe()); // Impôt sur le revenu
+
+        // Fin Quartier Marron
+        Rue RueLecourbe = new Rue("Rue Lecourbe", 60, 4, 50, 400);
+        marron.ajouterPropriete(RueLecourbe);
+        cases.add(RueLecourbe);
+
+        // Impôt sur le revenu
+        cases.add(new Taxe(200)); 
 
         // Gare Montparnasse
-        Gare gareMontparnasse = new Gare("Gare Montparnasse");
+        Gare gareMontparnasse = new Gare("Gare Montparnasse", 200);
         gares.ajouterPropriete(gareMontparnasse);
         cases.add(gareMontparnasse);
 
-        // Groupe bleu clair
-        Rue rueDeVaugirard = new Rue("Rue de Vaugirard", 100, 50, 30, 150);
-        Rue rueDeCourcelles = new Rue("Rue de Courcelles", 100, 50, 30, 150);
-        Rue avenueDeLaRepublique = new Rue("Avenue de la République", 120, 50, 40, 180);
-        bleuClair.ajouterPropriete(rueDeVaugirard);
-        bleuClair.ajouterPropriete(rueDeCourcelles);
-        bleuClair.ajouterPropriete(avenueDeLaRepublique);
-        cases.add(rueDeVaugirard);
+        // Debut Quartier Bleu Clair
+        Rue RueDeVaugirard = new Rue("Rue de Vaugirard", 100, 6, 50, 600);
+        bleuClair.ajouterPropriete(RueDeVaugirard);
+        cases.add(RueDeVaugirard);
+
+        // Case Fortune
         cases.add(new Fortune());
-        cases.add(rueDeCourcelles);
-        cases.add(avenueDeLaRepublique);
 
-        // Prison
-        cases.add(new Prison());
+        // Fin Quartier Bleu Clair
+        Rue RueDeCourcelles = new Rue("Rue de Courcelles", 100, 6, 50, 600);
+        bleuClair.ajouterPropriete(RueDeCourcelles);
+        cases.add(RueDeCourcelles);
 
-        // Groupe rose
-        Rue boulevardDeLaVillette = new Rue("Boulevard de la Villette", 140, 100, 50, 200);
-        Rue avenueDeNeuilly = new Rue("Avenue de Neuilly", 140, 100, 50, 200);
-        Rue rueDeParadis = new Rue("Rue de Paradis", 160, 100, 60, 220);
-        Service elec = new Service("Compagnie de distribution d'électricité");
-        rose.ajouterPropriete(boulevardDeLaVillette);
-        rose.ajouterPropriete(avenueDeNeuilly);
-        rose.ajouterPropriete(rueDeParadis);
-        services.ajouterPropriete(elec);
-        cases.add(boulevardDeLaVillette);
-        cases.add(elec);
-        cases.add(avenueDeNeuilly);
-        cases.add(rueDeParadis);
+        Rue AvenueDeLaRepublique = new Rue("Avenue de la République", 120, 8, 50, 800);
+        bleuClair.ajouterPropriete(AvenueDeLaRepublique);
+        cases.add(AvenueDeLaRepublique);
+
+        // Case Fortune
+        cases.add(new Fortune());
+
+        // Debut Quartier Rose
+        Rue BoulevardDeLaVillette = new Rue("Boulevard de la Villette", 140, 10, 100, 1000);
+        rose.ajouterPropriete(BoulevardDeLaVillette);
+        cases.add(BoulevardDeLaVillette);
+
+        // Service d'Électricité
+        Service serviceElec = new Service("Compagnie de distribution d'électricité", 150);
+        cases.add(serviceElec);
+        services.ajouterPropriete(serviceElec);
+        
+        // Fin Quartier Rose
+        Rue AvenueDeNeuilly = new Rue("Avenue de Neuilly", 140, 10, 100, 1000);
+        rose.ajouterPropriete(AvenueDeNeuilly);
+        cases.add(AvenueDeNeuilly);
+
+        Rue RueDeParadis = new Rue("Rue de Paradis", 160, 12, 100, 1200);
+        rose.ajouterPropriete(RueDeParadis);
+        cases.add(RueDeParadis);
 
         // Gare de Lyon
-        Gare gareDeLyon = new Gare("Gare de Lyon");
+        Gare gareDeLyon = new Gare("Gare de Lyon", 200);
         gares.ajouterPropriete(gareDeLyon);
         cases.add(gareDeLyon);
 
-        // Groupe orange
-        Rue avenueMozart = new Rue("Avenue Mozart", 180, 100, 70, 250);
-        Rue boulevardSaintMichel = new Rue("Boulevard Saint-Michel", 180, 100, 70, 250);
-        Rue placePigalle = new Rue("Place Pigalle", 200, 100, 80, 300);
-        Service eau = new Service("Compagnie de distribution d'eau");
-        orange.ajouterPropriete(avenueMozart);
-        orange.ajouterPropriete(boulevardSaintMichel);
-        orange.ajouterPropriete(placePigalle);
-        services.ajouterPropriete(eau);
-        cases.add(avenueMozart);
+        // Début Quartier Orange
+        Rue AvenueMozart = new Rue("Avenue Mozart", 180, 14, 100, 1400);
+        orange.ajouterPropriete(AvenueMozart);
+        cases.add(AvenueMozart);
+
+        // Case Fortune
         cases.add(new Fortune());
-        cases.add(boulevardSaintMichel);
-        cases.add(eau);
-        cases.add(placePigalle);
+
+        // Fin Quartier Orange
+        Rue BoulevardSaintMichel = new Rue("Boulevard Saint-Michel", 180, 14, 100, 1400);
+        orange.ajouterPropriete(BoulevardSaintMichel);
+        cases.add(BoulevardSaintMichel);
+
+        Rue PlacePigalle = new Rue("Place Pigalle", 200, 16, 100, 1600);
+        orange.ajouterPropriete(PlacePigalle);
+        cases.add(PlacePigalle);
+
+        // Case Prison
+        cases.add(new Prison());
+
+        // Debut Quartier Rouge
+        Rue AvenueMatignon = new Rue("Avenue Matignon", 220, 18, 150, 1800);
+        rouge.ajouterPropriete(AvenueMatignon);
+        cases.add(AvenueMatignon);
+
+        // Case Fortune
+        cases.add(new Fortune());
+
+        // Fin Quartier Rouge
+        Rue BoulevardMalesherbes = new Rue("Boulevard Malesherbes", 220, 18, 150, 1800);
+        rouge.ajouterPropriete(BoulevardMalesherbes);
+        cases.add(BoulevardMalesherbes);
+
+        Rue AvenueHenriMartin = new Rue("Avenue Henri Martin", 240, 20, 150, 2000);
+        rouge.ajouterPropriete((Propriete) AvenueHenriMartin);
+        cases.add(AvenueHenriMartin);
+
+        // Gare du Nord
+        Gare gareDuNord = new Gare("Gare du Nord", 200);
+        gares.ajouterPropriete(gareDuNord);
+        cases.add(gareDuNord);
+
+        // Début Quartier Jaune
+        Rue FaubourgSaintHonore = new Rue("Faubourg Saint Honoré", 260, 22, 150, 2200);
+        jaune.ajouterPropriete(FaubourgSaintHonore);
+        cases.add(FaubourgSaintHonore);
+
+        Rue PlaceDeLaBourse = new Rue("Place de la Bourse", 260, 22, 150, 2200);
+        jaune.ajouterPropriete(PlaceDeLaBourse);
+        cases.add(PlaceDeLaBourse);
+
+        // Service des Eaux
+        Service serviceEau = new Service("Compagnie de distribution des eaux", 150);
+        cases.add(serviceEau);
+        services.ajouterPropriete(serviceEau);
+
+        // Fin Quartier Jaune
+        Rue RueLaFayette = new Rue("Rue la Fayette", 280, 24, 150, 2400);
+        jaune.ajouterPropriete(RueLaFayette);
+        cases.add(RueLaFayette);
+
+        // Case Fortune
+        cases.add(new Fortune());
+
+        // Debut Quartier Vert
+        Rue AvenueDeBreteuil = new Rue("Avenue de Breteuil", 300, 26, 200, 2600);
+        vert.ajouterPropriete(AvenueDeBreteuil);
+        cases.add(AvenueDeBreteuil);
+
+        Rue AvenueFoch = new Rue("Avenue Foch", 300, 26, 200, 2600);
+        vert.ajouterPropriete(AvenueFoch);
+        cases.add(AvenueFoch);
+
+        // Case Fortune
+        cases.add(new Fortune());
+
+        // Fin Quartier Vert
+        Rue BoulevardDesCapucines = new Rue("Boulevard des Capucines", 320, 28, 200, 2800);
+        vert.ajouterPropriete(BoulevardDesCapucines);
+        cases.add(BoulevardDesCapucines);
+
+        // Gare Saint Lazarre
+        Gare gareSaintLazarre = new Gare("Gare Saint Lazarre", 200);
+        gares.ajouterPropriete(gareSaintLazarre);
+        cases.add(gareSaintLazarre);
+
+        // Case Fortune
+        cases.add(new Fortune());
+
+        // Debut Quartier Bleu Fonce
+        Rue AvenuedesChampsElysees = new Rue("Avenue des Champs Elysees", 350, 35, 200, 3500);
+        bleuFonce.ajouterPropriete(AvenuedesChampsElysees);
+        cases.add(AvenuedesChampsElysees);
+
+        // Taxe de Luxe
+        cases.add(new Taxe(100)); 
+
+        // Fin Quartier Bleu Fonce
+        Rue RueDeLaPaix = new Rue("Rue de la Paix", 400, 50, 200, 5000);
+        bleuFonce.ajouterPropriete(RueDeLaPaix);
+        cases.add(RueDeLaPaix);
 
         // Création des liens entre les cases
         for (int i = 0; i < cases.size() - 1; i++) {
