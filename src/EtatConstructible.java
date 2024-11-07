@@ -6,6 +6,7 @@ public class EtatConstructible extends EtatRue {
 
     @Override
     public void joueurArrive(Personnage joueur) {
+        rue.afficherDetails();
         if (!rue.estProprietaire(joueur)) {
             double loyer = calculLoyer();
             joueur.payer(loyer);

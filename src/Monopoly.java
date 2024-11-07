@@ -71,6 +71,10 @@ public class Monopoly {
         return joueursActifs <= 1;
     }
 
+    public void afficherPlateau() {
+        this.plateau.afficher(joueurs);
+    }
+
     // ---- DEMOS METHODS ----
     public void demo2() {
         MenuDemo m = new MenuDemo();
@@ -121,6 +125,7 @@ public class Monopoly {
 
     public void demo6() {
         // Démo : Construire dans un quartier possédé
+        System.out.println("/TODO");
         // TODO
     }
 
@@ -134,33 +139,77 @@ public class Monopoly {
         Gare gareDeLyon = (Gare) plateau.getCase("Gare de Lyon");
         j1.nouvellePropriete(gareMontparnasse);
         j1.nouvellePropriete(gareDeLyon);
-        j2.setPosition(plateau.getCase("Rue Lecourbe"));
+        j2.setPosition(plateau.getCase("Rue Lecourbe").getCaseSuivante());
         this.setJoueurCourant();
         m.loop(this);
     }
 
     public void demo8() {
+        MenuDemo m = new MenuDemo();
         // Démo : Tomber sur une des compagnies possédées par un joueur
-        // TODO
+        initJeuDemos();
+        Personnage j1 = joueurs.get(joueurCourant);
+        Personnage j2 = joueurs.get((joueurCourant + 1) % joueurs.size());
+        Service eau = (Service) plateau.getCase("Compagnie de distribution des eaux");
+        Service elec = (Service) plateau.getCase("Compagnie de distribution d'électricité");
+        j1.nouvellePropriete(eau);
+        j1.nouvellePropriete(elec);
+        j2.setPosition(plateau.getCase("Place de la Bourse"));
+        this.setJoueurCourant();
+        m.loop(this);
     }
 
     public void demo9() {
+        MenuDemo m = new MenuDemo();
         // Démo : Passer par la case Départ
-        // TODO
+        initJeuDemos();
+        Personnage j1 = joueurs.get(joueurCourant);
+        j1.setPosition(plateau.getCase("Rue de la Paix"));
+        m.loop(this);
     }
 
     public void demo10() {
+        MenuDemo m = new MenuDemo();
         // Démo : Tomber sur une case Taxe
-        // TODO
+        initJeuDemos();
+        Personnage j1 = joueurs.get(joueurCourant);
+        j1.setPosition(plateau.getCase("Avenue des Champs Elysees"));
+        m.loop(this);
     }
 
     public void demo11() {
+        MenuDemo m = new MenuDemo();
         // Démo : Tomber sur un terrain libre, sans pouvoir l'acheter
-        // TODO
+        initJeuDemos();
+        Personnage j1 = joueurs.get(joueurCourant);
+        j1.setPosition(plateau.getCase("Avenue des Champs Elysees").getCaseSuivante());
+        j1.setArgent(1);
+        m.loop(this);
     }
 
     public void demo12() {
+        MenuDemo m = new MenuDemo();
         // Démo : Tomber sur un terrain acheté, sans pouvoir payer
-        // TODO
+        initJeuDemos();
+        Personnage j1 = joueurs.get(joueurCourant);
+        Personnage j2 = joueurs.get((joueurCourant + 1) % joueurs.size());
+        Rue RuedelaPaix = (Rue) plateau.getCase("Rue de la Paix");
+        j1.nouvellePropriete(RuedelaPaix);
+        RuedelaPaix.setEtat(new EtatAcheter(RuedelaPaix));
+
+        j2.setPosition(plateau.getCase("Avenue des Champs Elysees").getCaseSuivante());
+        j2.setArgent(1);
+        this.setJoueurCourant();
+        m.loop(this);
+    }
+
+    public void demo13() {
+        MenuDemo m = new MenuDemo();
+        // Démo : Tomber sur une taxe, sans pouvoir payer
+        initJeuDemos();
+        Personnage j1 = joueurs.get(joueurCourant);
+        j1.setPosition(plateau.getCase("Avenue des Champs Elysees"));
+        j1.setArgent(1);
+        m.loop(this);
     }
 }

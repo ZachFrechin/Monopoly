@@ -3,8 +3,8 @@ import java.util.List;
 
 public class MenuAchat extends Menu {
     
-    public MenuAchat(String nom) {
-        super("Menu Achat : " + nom, creerOptions());
+    public MenuAchat(String nom, int prix) {
+        super("Menu Achat : " + nom + " - Prix d'achat :" + prix , creerOptions());
     }
 
         private static List<String> creerOptions() {

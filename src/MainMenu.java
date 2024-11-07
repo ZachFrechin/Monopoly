@@ -22,6 +22,7 @@ public class MainMenu extends Menu {
         list.add("Tomber sur une case Taxe");
         list.add("Tomver sur un terrain libre, sans pouvoir l'acheter");
         list.add("Tomber sur un terrain acheté, sans pouvoir payer");
+        list.add("Tomber sur une taxe, sans pouvoir payer");
         return list;
     }
 
@@ -37,7 +38,7 @@ public class MainMenu extends Menu {
                 break;
             case 1: // 1 - Lancer partie classique
                 jeu = new Monopoly();
-                jeu.lancerPartie(4);
+                jeu.lancerPartie(2);
                 break;
             case 2: // 2 - Démo : Tomber sur un terrain libre
                 jeu = new Monopoly();
@@ -82,6 +83,10 @@ public class MainMenu extends Menu {
             case 12: // 12 - Démo : Tomber sur un terrain acheté, sans pouvoir payer
                 jeu = new Monopoly();
                 jeu.demo12();
+                break;
+            case 13: // 13 - Démo : Tomber sur une taxe, sans pouvoir payer
+                jeu = new Monopoly();
+                jeu.demo13();
                 break;
             default: // Relancer le menu
                 break;

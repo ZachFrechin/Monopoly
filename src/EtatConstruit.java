@@ -19,8 +19,17 @@ public class EtatConstruit extends EtatRue {
         notifier();
     }
 
+    public int getNbMaison() {
+        return this.nbMaison;
+    }
+
+    public int getNbHotel() {
+        return this.nbHotel;
+    }
+
     @Override
     public void joueurArrive(Personnage joueur) {
+        rue.afficherDetails();
         if (!rue.estProprietaire(joueur)) {
             double loyer = calculLoyer();
             joueur.payer(loyer);

@@ -12,6 +12,8 @@ public class MenuDemo extends Menu {
         list.add("Fin du tour");
         list.add("Lancer les des");
         list.add("Construire des maisons / hôtels");
+        list.add("Afficher mon solde");
+        list.add("Afficher le plateau");
         return list;
     }
 
@@ -29,6 +31,12 @@ public class MenuDemo extends Menu {
                 break;
             case 2: //  2 - Construire maison / hôtel
                 joueur.construire(jeu);
+                break;
+            case 3: // 3 -Afficher mon solde
+                joueur.afficherSolde();
+                break;
+            case 4: // 4 - Afficher le plateau
+                jeu.afficherPlateau();
                 break;
             default: // Relancer le menu
                 break;

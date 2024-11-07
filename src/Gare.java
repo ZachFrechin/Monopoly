@@ -9,16 +9,25 @@ public class Gare extends Propriete {
     }
 
     @Override
+    public String getNom() {
+        return this.nom;
+    }
+
+    @Override
     public void joueurArrive(Personnage joueur) {
         System.out.println(joueur.getNom() + " est sur une gare : " + this.nom);
 
         if (proprietaire == null) { // Pas de propriétaire
-            if (joueur.proposerAchat(this)) {
-                joueur.payer(prix);
-                setProprietaire(joueur);
-                joueur.nouvellePropriete(this);
-                System.out.println(joueur.getNom() + " a acheté la gare " + this.nom);
-                notifier(); // Notifie le quartier de l'achat
+            if (joueur.soldeSuffisant(this.getPrix())) {
+                if (joueur.proposerAchat(this)) {
+                    joueur.payer(prix);
+                    setProprietaire(joueur);
+                    joueur.nouvellePropriete(this);
+                    System.out.println(joueur.getNom() + " a acheté la gare " + this.nom);
+                    notifier(); // Notifie le quartier de l'achat
+                }
+            } else {
+                System.out.println("Solde insuffisant pour acheter la propriété");
             }
         } else if (!estProprietaire(joueur)) { // La gare a un propriétaire différent
             double loyer = calculLoyer();
@@ -28,6 +37,11 @@ public class Gare extends Propriete {
         } else {
             System.out.println(joueur.getNom() + " est le propriétaire de cette gare.");
         }
+    }
+
+    @Override
+    public double calculLoyer(Des des) {
+        return 0;
     }
 
     @Override

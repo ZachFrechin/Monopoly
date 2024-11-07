@@ -7,7 +7,9 @@ public class EtatLibre extends EtatRue {
     @Override
     public void joueurArrive(Personnage joueur) {
         System.out.println(joueur.getNom() + " est sur une rue : " + rue.getNom());
+        rue.afficherDetails();
         if (joueur.soldeSuffisant(rue.getPrix())) {
+            joueur.afficherSolde();
             if (joueur.proposerAchat(rue)) {
                 System.out.println(joueur.getNom() + " a acheté " + rue.getNom());
                 joueur.payer(rue.getPrix());

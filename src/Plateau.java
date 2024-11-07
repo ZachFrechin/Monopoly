@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.paint.Color;
+
 public class Plateau {
 
     private Case caseDepart;
@@ -15,15 +17,25 @@ public class Plateau {
     private void genererCases() {
         // Création des quartiers
         Quartier marron = new Quartier("Marron");
+        marron.setCouleur(ConsoleColors.CHOCOLATE);
         Quartier bleuClair = new Quartier("Bleu Clair");
+        bleuClair.setCouleur(ConsoleColors.DEEPSKYBLUE);
         Quartier rose = new Quartier("Rose");
+        rose.setCouleur(ConsoleColors.HOTPINK);
         Quartier orange = new Quartier("Orange");
+        orange.setCouleur(ConsoleColors.ORANGE);
         Quartier rouge = new Quartier("Rouge");
+        rouge.setCouleur(ConsoleColors.RED);
         Quartier jaune = new Quartier("Jaune");
+        jaune.setCouleur(ConsoleColors.GOLD);
         Quartier vert = new Quartier("Vert");
+        vert.setCouleur(ConsoleColors.LIGHTGREEN);
         Quartier bleuFonce = new Quartier("Bleu Foncé");
+        bleuFonce.setCouleur(ConsoleColors.ROYALBLUE);
         Quartier gares = new Quartier("Gares");
+        gares.setCouleur(ConsoleColors.WHITE);
         Quartier services = new Quartier("Services");
+        services.setCouleur(ConsoleColors.WHITE);
 
         // Ajout des quartiers à la liste
         quartiers.add(marron);
@@ -38,7 +50,7 @@ public class Plateau {
         quartiers.add(services);
 
         // Case de départ
-        caseDepart = new Case();
+        caseDepart = new Depart();
         cases.add(caseDepart);
 
         // Ajout des cases du vrai Monopoly
@@ -238,5 +250,11 @@ public class Plateau {
 
     public List<Quartier> getQuartiers() {
         return quartiers;
+    }
+
+    public void afficher(List<Personnage> l) {
+        for (int i = 0; i < cases.size(); i++) {
+            cases.get(i).afficher(l);
+        }
     }
 }

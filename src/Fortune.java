@@ -1,5 +1,11 @@
 public class Fortune extends Case {
 
+
+    @Override
+    public String getNom() {
+        return "Fortune";
+    }
+
     @Override
     public void joueurArrive(Personnage joueur) {
         System.out.println(joueur.getNom() + " est arrivé sur une case Fortune.");
