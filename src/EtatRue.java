@@ -22,5 +22,36 @@ public abstract class EtatRue {
         return rue.estProprietaire(joueur);
     }
 
-    public abstract double calculLoyer();
+    public void construire_maison() {
+        System.out.println("Construction impossible");
+    }
+
+    public int prix_maison() {
+        return this.rue.getPrixMaison();
+    }
+
+    public int prix_hotel() {
+        return this.rue.getPrixHotel();
+    }
+    public int loyer_maison() {
+        return this.rue.getLoyerMaison();
+    }
+
+    public int loyer_hotel() {
+        return this.rue.getLoyerHotel();
+    }
+
+
+
+    public void construire_hotel() {
+        System.out.println("Construction impossible");
+    }
+
+
+
+
+
+
+
+    public abstract int calculLoyer();
 }

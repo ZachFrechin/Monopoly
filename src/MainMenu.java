@@ -20,9 +20,11 @@ public class MainMenu extends Menu {
         list.add("Tomber sur un des compagnies possédées par un joueur");
         list.add("Passer par la case Départ");
         list.add("Tomber sur une case Taxe");
-        list.add("Tomver sur un terrain libre, sans pouvoir l'acheter");
+        list.add("Tomber sur un terrain libre, sans pouvoir l'acheter");
         list.add("Tomber sur un terrain acheté, sans pouvoir payer");
         list.add("Tomber sur une taxe, sans pouvoir payer");
+        list.add("Tomber sur un terrain avec des maisons");
+        list.add("Tomber sur un terrain que l'on possède");
         return list;
     }
 
@@ -87,6 +89,14 @@ public class MainMenu extends Menu {
             case 13: // 13 - Démo : Tomber sur une taxe, sans pouvoir payer
                 jeu = new Monopoly();
                 jeu.demo13();
+                break;
+            case 14: // 14 : Démo - Tomber sur un terrain avec des maisons
+                jeu = new Monopoly();
+                jeu.demo14();
+                break;
+            case 15: // 15 : Démo - Tomber sur un terrain que l'on possède
+                jeu = new Monopoly();
+                jeu.demo15();
                 break;
             default: // Relancer le menu
                 break;

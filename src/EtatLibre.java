@@ -27,6 +27,8 @@ public class EtatLibre extends EtatRue {
         System.out.println(rue.getNom() + " est maintenant achetée.");
     }
 
+    
+
     @Override
     public double calculLoyer() {
         return 0; // Pas de loyer pour une rue non achetée

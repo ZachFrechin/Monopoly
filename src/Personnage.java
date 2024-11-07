@@ -25,6 +25,10 @@ public class Personnage {
         return this.position;
     }
 
+    public double getSolde() {
+        return this.argent;
+    }
+
     public List<Propriete> getMesProprietes() {
         return this.mesProprietes;
     }

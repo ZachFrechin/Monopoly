@@ -20,6 +20,10 @@ public abstract class Menu {
         this.title = title;
     }
 
+    public void setOptions(List<String> options) {
+        this.options = options;
+    }
+
     public void loop(Monopoly jeu) {
         int choix;
         do {
