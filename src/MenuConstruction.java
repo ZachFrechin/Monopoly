@@ -14,8 +14,10 @@ public class MenuConstruction extends Menu {
         for (Propriete p : proprietesJoueur) {
             if (p instanceof Rue) {
                 Rue pr = (Rue) p;
-                if (pr.getEtatRue() instanceof EtatConstructible || pr.getEtatRue() instanceof EtatConstruit) {
-                    list.add(pr.getNom());
+                if (pr.getEtatRue() instanceof EtatConstructible) {
+                    list.add(pr.getNom() + " | Maisons : 0 | Hôtels : 0");
+                } else if(pr.getEtatRue() instanceof EtatConstruit) {
+                    list.add(pr.getNom() + " | Maisons : " + ((EtatConstruit) pr.getEtatRue()).getNbMaison() + " | Hôtels : " + ((EtatConstruit) pr.getEtatRue()).getNbHotel());
                 }
             }
         }
@@ -28,12 +30,8 @@ public class MenuConstruction extends Menu {
     public void traiterChoix(int choix, Monopoly jeu) {
         Personnage joueur = jeu.getJoueurCourant();
         System.out.println(" -- " + this.getOptions().get(choix) + " -- ");
-        switch (choix) {
-            case 0: // 0 - Fin du tour de jeu
-                break;
-            case 1: // 1 - Lancer les des
-                break;
-            default: // Relancer le menu
+        switch (choix) { // Remplacer car nb choix inconnu
+            default: // Fin menu
                 break;
         }
 

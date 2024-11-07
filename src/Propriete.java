@@ -38,4 +38,5 @@ public abstract class Propriete extends Case implements Subject {
 
     public abstract int getPrix();
     public abstract double calculLoyer();
+    public abstract double calculLoyer(Des des);
 }

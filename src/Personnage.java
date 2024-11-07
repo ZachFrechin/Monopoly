@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javafx.scene.SubScene;
+
 public class Personnage {
 
     private String nom;
@@ -19,6 +21,10 @@ public class Personnage {
         return this.nom;
     }
 
+    public Case getPosition() {
+        return this.position;
+    }
+
     public List<Propriete> getMesProprietes() {
         return this.mesProprietes;
     }
@@ -26,6 +32,10 @@ public class Personnage {
     // Setters
     public void setPosition(Case caseNouvelle) {
         this.position = caseNouvelle;
+    }
+
+    public void setArgent(double montant) {
+        this.argent = montant;
     }
 
     public boolean peutJouer() {
@@ -43,11 +53,24 @@ public class Personnage {
     }
 
     public void jouerTour(Des des) {
-        des.lancerDes();
-        int deplacement = des.getTotalDes();
-        System.out.println(nom + " se déplace de " + deplacement + " cases");
-        position = position.avancer(deplacement, this);
-        position.joueurArrive(this);
+        if (des.getLancables()) {
+            des.lancerDes();
+            des.setLancables(false);
+            if (des.estDouble()) {
+                des.setLancables(true);
+                System.out.println("Doubles !");
+            }
+            int deplacement = des.getTotalDes();
+            System.out.println(nom + " se déplace de " + deplacement + " cases");
+            position = position.avancer(deplacement, this);
+            if (position instanceof Service) {
+                position.joueurArrive(this, des);
+            } else {
+                position.joueurArrive(this);
+            }
+        } else {
+            System.out.println("Impossible de relancer les dés pendant ce tour");
+        }
     }
 
     public void jouerTour(Des des, Integer score) {
@@ -55,21 +78,28 @@ public class Personnage {
         int deplacement = des.getTotalDes();
         System.out.println(nom + " se déplace de " + deplacement + " cases");
         position = position.avancer(deplacement, this);
-        position.joueurArrive(this);
+        if (position instanceof Service) {
+            position.joueurArrive(this, des);
+        } else {
+            position.joueurArrive(this);
+        }
     }
 
     public boolean proposerAchat(Propriete propriete) {
-        MenuAchat ma = new MenuAchat(propriete.getNom());
+        MenuAchat ma = new MenuAchat(propriete.getNom(), propriete.getPrix());
         return (ma.getChoix() == 1);
+    }
+
+    public void afficherSolde() {
+        System.out.println("Solde de " + nom + " : " + argent);
     }
 
     public void payer(double somme) {
         argent -= somme;
         if (argent < 0) {
             System.out.println(nom + " est en faillite !");
-        }
-
-        System.out.println("Nouveau solde de " + nom + " : " + argent);
+        }     
+        afficherSolde();   
     }
 
     public void nouvellePropriete(Propriete propriete) {
@@ -79,7 +109,7 @@ public class Personnage {
 
     public void crediter(double montant) {
         argent += montant;
-        System.out.println("Nouveau solde de " + nom + " : " + argent);
+        afficherSolde();
     }
 
 

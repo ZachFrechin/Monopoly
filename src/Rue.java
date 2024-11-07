@@ -32,6 +32,24 @@ public class Rue extends Propriete {
         this.etatRue = new EtatLibre(this); // État initial
     }
 
+    public void afficherDetails() {
+        String nomProprietaire = proprietaire!=null?proprietaire.getNom():"Pas de proprietaire";
+        System.out.println("- " + nom + " -");
+        System.out.println("Proprietaire : " + nomProprietaire);
+        System.out.println("\tLoyers");
+        System.out.println("Terrain unique : " + loyer);
+        System.out.println("Quartier entier : " + (loyer * 1.5));
+        System.out.println("Par maison : " + loyerMaison);
+        System.out.println("Par hôtel : " + loyerHotel);
+        System.out.println("\tMaisons & Hôtels");
+        if (this.etatRue instanceof EtatConstruit) {
+            System.out.println("Maisons : " + ((EtatConstruit) this.getEtatRue()).getNbMaison() + " | Hôtels : " + ((EtatConstruit) this.getEtatRue()).getNbHotel());
+        } else {
+            System.out.println("Maisons : 0 | Hôtels : 0");
+        }
+        System.out.println("--------------------------");
+    }
+
     @Override
     public void notifier() {
         // Logique de notification vers l’observateur
@@ -52,6 +70,11 @@ public class Rue extends Propriete {
 
     @Override
     public double calculLoyer() {
+        return etatRue.calculLoyer();
+    }
+
+    @Override
+    public double calculLoyer(Des des) {
         return etatRue.calculLoyer();
     }
 

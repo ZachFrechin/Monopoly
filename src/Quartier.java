@@ -1,9 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.paint.Color;
+
 public class Quartier implements Observer {
 
     private String nom;
+    private String couleur;
     private List<Propriete> proprietes = new ArrayList<>();
 
 
@@ -17,6 +20,14 @@ public class Quartier implements Observer {
 
     public String getNom() {
         return this.nom;
+    }
+
+    public String getCouleur() {
+        return this.couleur;
+    }
+
+    public void setCouleur(String c) {
+        this.couleur = c;
     }
 
     public void ajouterPropriete(Propriete propriete) {

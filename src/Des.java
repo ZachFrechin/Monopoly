@@ -5,6 +5,15 @@ public class Des {
     private int des1;
     private int des2;
     private Random random = new Random();
+    private boolean lancables = true;
+
+    public void setLancables(boolean b) {
+        this.lancables = b;
+    }
+
+    public boolean getLancables() {
+        return this.lancables;
+    }
 
     public void lancerDes() {
         des1 = random.nextInt(6) + 1;
