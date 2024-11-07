@@ -124,9 +124,17 @@ public class Monopoly {
     }
 
     public void demo6() {
+        MenuDemo m = new MenuDemo();
         // Démo : Construire dans un quartier possédé
-        System.out.println("/TODO");
-        // TODO
+        initJeuDemos();
+        Personnage j1 = joueurs.get(joueurCourant);
+        Rue BlvBelleville = (Rue) plateau.getCase("Boulevard de Belleville");
+        Rue RueLecourbe = (Rue) plateau.getCase("Rue Lecourbe"); // Step de 2
+        j1.nouvellePropriete(BlvBelleville);
+        j1.nouvellePropriete(RueLecourbe);
+        RueLecourbe.setEtat(new EtatAcheter(RueLecourbe));
+        BlvBelleville.setEtat(new EtatAcheter(BlvBelleville));
+        m.loop(this);
     }
 
     public void demo7() {
@@ -210,6 +218,36 @@ public class Monopoly {
         Personnage j1 = joueurs.get(joueurCourant);
         j1.setPosition(plateau.getCase("Avenue des Champs Elysees"));
         j1.setArgent(1);
+        m.loop(this);
+    }
+
+    public void demo14() {
+        MenuDemo m = new MenuDemo();
+        // Démo : Tomber sur un terrain acheté avec des maisons
+        initJeuDemos();
+        Personnage j1 = joueurs.get(joueurCourant);
+        Rue BlvBelleville = (Rue) plateau.getCase("Boulevard de Belleville");
+        Rue RueLecourbe = (Rue) plateau.getCase("Rue Lecourbe"); // Step de 2
+        j1.nouvellePropriete(BlvBelleville);
+        j1.nouvellePropriete(RueLecourbe);
+        BlvBelleville.setEtat(new EtatAcheter(BlvBelleville));
+        RueLecourbe.setEtat(new EtatAcheter(RueLecourbe));
+        EtatConstructible eCBelleville = (EtatConstructible) BlvBelleville.getEtatRue();
+        eCBelleville.construire_maison();
+        eCBelleville.construire_maison();
+        this.setJoueurCourant();
+        m.loop(this);
+
+    }
+
+    public void demo15() {
+        MenuDemo m = new MenuDemo();
+        // Démo : Tomber sur un terrain que l'on possède
+        initJeuDemos();
+        Personnage j1 = joueurs.get(joueurCourant);
+        Rue BlvBelleville = (Rue) plateau.getCase("Boulevard de Belleville");
+        j1.nouvellePropriete(BlvBelleville);
+        BlvBelleville.setEtat(new EtatAcheter(BlvBelleville));
         m.loop(this);
     }
 }

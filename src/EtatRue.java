@@ -27,16 +27,26 @@ public abstract class EtatRue {
     }
 
     public int prix_maison() {
-        return this.rue.getPrix() * 5;
+        return this.rue.getPrixMaison();
     }
+
+    public int prix_hotel() {
+        return this.rue.getPrixHotel();
+    }
+    public int loyer_maison() {
+        return this.rue.getLoyerMaison();
+    }
+
+    public int loyer_hotel() {
+        return this.rue.getLoyerHotel();
+    }
+
+
 
     public void construire_hotel() {
         System.out.println("Construction impossible");
     }
 
-    public int prix_hotel() {
-        return this.rue.getPrix() * 5;
-    }
 
 
 

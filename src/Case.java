@@ -47,6 +47,19 @@ public class Case {
             String nomProprietaire = proprietaire!=null?proprietaire.getNom():"Pas de proprietaire";
             String couleurQuartier = ((Propriete) this).getQuartier().getCouleur();
             s = couleurQuartier + this.getNom() +"("+ nomProprietaire +")" + ConsoleColors.RESET;
+            if (this instanceof Rue) {
+                EtatRue er = ((Rue) this).getEtatRue();
+                if (er instanceof EtatConstructible) {
+                    s+= " - ";
+                    for (int i = 0; i < ((EtatConstructible) er).getNbMaison(); i++) {
+                        s += "/M\\";
+                    }
+                    s+= " - ";
+                    for (int i = 0; i < ((EtatConstructible) er).getNbHotel(); i++) {
+                        s += "|H|";
+                    }
+                }
+            }
         } else {
             s = ConsoleColors.WHITE + this.getNom() + ConsoleColors.RESET;
         }

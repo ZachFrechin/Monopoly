@@ -2,9 +2,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MenuConstruction extends Menu {
+
+    private static List<Rue> rueConstructibles = new ArrayList();
+    private Personnage joueur;
     
     public MenuConstruction(Personnage joueur) {
         super("Menu Construction", creerOptions(joueur));
+        this.joueur = joueur;
     }
 
     private static List<String> creerOptions(Personnage joueur) {
@@ -15,26 +19,41 @@ public class MenuConstruction extends Menu {
             if (p instanceof Rue) {
                 Rue pr = (Rue) p;
                 if (pr.getEtatRue() instanceof EtatConstructible) {
-                    list.add(pr.getNom() + " | Maisons : 0 | Hôtels : 0");
-                } else if(pr.getEtatRue() instanceof EtatConstruit) {
-                    list.add(pr.getNom() + " | Maisons : " + ((EtatConstruit) pr.getEtatRue()).getNbMaison() + " | Hôtels : " + ((EtatConstruit) pr.getEtatRue()).getNbHotel());
+                    EtatConstructible erc = (EtatConstructible) pr.getEtatRue();
+                    list.add(pr.getNom() + " | Maisons : " + erc.getNbMaison() + " | Hôtels : " + erc.getNbHotel());
                 }
+                rueConstructibles.add(pr);
             }
         }
         return list;
     }
 
+    private void updateOptions() {
+        this.setOptions(creerOptions(joueur));
+    }
+
+    @Override
+    public void loop(Monopoly jeu) {
+        int choix;
+        updateOptions();
+        do {
+            choix = getChoix();
+            traiterChoix(choix, jeu);
+            updateOptions();
+        } while (choix != 0);
+    }
+
+
     @Override
     public void traiterChoix(int choix) {}
 
     public void traiterChoix(int choix, Monopoly jeu) {
-        Personnage joueur = jeu.getJoueurCourant();
-        System.out.println(" -- " + this.getOptions().get(choix) + " -- ");
-        switch (choix) { // Remplacer car nb choix inconnu
-            default: // Fin menu
-                break;
+        if (choix > 0 ) {
+            System.out.println(" -- " + this.getOptions().get(choix - 1) + " -- ");
+            Rue rueChoisie = rueConstructibles.get(choix - 1);
+            MenuConstructionRue mcr = new MenuConstructionRue(rueChoisie);
+            mcr.loop(jeu);
         }
-
     }
     
 }

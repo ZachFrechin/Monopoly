@@ -19,6 +19,14 @@ public class Rue extends Propriete {
         return loyerHotel;
     }
 
+    public int getPrixMaison() {
+        return prixMaison;
+    }
+
+    public int getPrixHotel() {
+        return prixMaison * 4;
+    }
+
     public EtatRue getEtatRue() {
         return this.etatRue;
     }
@@ -38,7 +46,7 @@ public class Rue extends Propriete {
         System.out.println("Proprietaire : " + nomProprietaire);
         System.out.println("\tLoyers");
         System.out.println("Terrain unique : " + loyer);
-        System.out.println("Quartier entier : " + (loyer * 1.5));
+        System.out.println("Quartier entier : " + (loyer * 2));
         System.out.println("Par maison : " + loyerMaison);
         System.out.println("Par hôtel : " + loyerHotel);
         System.out.println("\tMaisons & Hôtels");
