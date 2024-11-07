@@ -1,7 +1,15 @@
 public class EtatConstructible extends EtatRue {
 
+    private int maison;
+    private int hotel;
+    private int[] coeff = new int[] {5, 15, 45, 80};
+
     public EtatConstructible(Rue rue) {
         super(rue);
+        maison = 0;
+        hotel = 0;
+
+        
     }
 
     @Override
@@ -27,5 +35,33 @@ public class EtatConstructible extends EtatRue {
             notifier();
             System.out.println("Construction terminée : " + nbMaison + " maisons, " + nbHotel + " hôtel(s).");
         }
+    }
+
+    @Override
+    public void construire_maison() {
+        if(maison == 4) {
+            System.out.println("Vous ne pouvez pas construire plus de maison.");
+        }else {
+        construire(1, 0);
+        }
+    }
+
+    @Override 
+    public void construire_hotel() {    
+        if(hotel == 4) {
+            System.out.println("Vous ne pouvez pas construire plus de hotel.");
+        }else {
+        construire(0, 1);
+        }
+    }
+
+    @Override 
+    public int prix_maison() {
+        return rue.getPrix() * this.coeff[maison];
+    }
+
+    @Override
+    public int prix_hotel() {
+        return rue.getPrix() * this.coeff[hotel];
     }
 }
