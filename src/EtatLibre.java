@@ -28,7 +28,7 @@ public class EtatLibre extends EtatRue {
     }
 
     @Override
-    public double calculLoyer() {
+    public int calculLoyer() {
         return 0; // Pas de loyer pour une rue non achetée
     }
 }

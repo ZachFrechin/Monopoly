@@ -69,14 +69,16 @@ public class Rue extends Propriete {
     }
 
     @Override
-    public double calculLoyer() {
+    public int calculLoyer() {
         return etatRue.calculLoyer();
     }
 
     @Override
-    public double calculLoyer(Des des) {
+    public int calculLoyer(Des des) {
         return etatRue.calculLoyer();
     }
+
+
 
     public int getPrix() {
         return loyer;

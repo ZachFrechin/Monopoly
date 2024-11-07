@@ -31,7 +31,7 @@ public class EtatConstruit extends EtatRue {
     public void joueurArrive(Personnage joueur) {
         rue.afficherDetails();
         if (!rue.estProprietaire(joueur)) {
-            double loyer = calculLoyer();
+            int loyer = calculLoyer();
             joueur.payer(loyer);
             rue.getProprietaire().crediter(loyer);
             System.out.println(joueur.getNom() + " a payé un loyer de " + loyer + " à " + rue.getProprietaire().getNom());
@@ -41,8 +41,8 @@ public class EtatConstruit extends EtatRue {
     }
 
     @Override
-    public double calculLoyer() {
-        double baseLoyer = rue.getPrix();
+    public int calculLoyer() {
+        int baseLoyer = rue.getPrix();
         return baseLoyer + (nbMaison * rue.getLoyerMaison()) + (nbHotel * rue.getLoyerHotel());
     }
 }

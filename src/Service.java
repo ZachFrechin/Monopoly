@@ -33,7 +33,7 @@ public class Service extends Propriete {
                 System.out.println("Solde insuffisant pour acheter la propriété");
             }
         } else if (!estProprietaire(joueur)) { // Le service a un propriétaire différent
-            double loyer = calculLoyer(des);
+            int loyer = calculLoyer(des);
             joueur.payer(loyer);
             proprietaire.crediter(loyer); // Le propriétaire reçoit la taxe
             System.out.println(joueur.getNom() + " a payé une taxe de " + loyer + " à " + proprietaire.getNom());
@@ -43,8 +43,8 @@ public class Service extends Propriete {
     }
 
     @Override
-    public double calculLoyer(Des des) {
-        double loyer = 0;
+    public int calculLoyer(Des des) {
+        int loyer = 0;
         Observer quartier = getObserveur();
         if (quartier instanceof Quartier) {
             int nbServices = ((Quartier) quartier).getNbProprietesDetenues(this);
@@ -63,7 +63,7 @@ public class Service extends Propriete {
     }
 
     @Override
-    public double calculLoyer() {
+    public int calculLoyer() {
         // Default method in case of error
         return 24;
     }

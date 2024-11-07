@@ -30,7 +30,7 @@ public class Gare extends Propriete {
                 System.out.println("Solde insuffisant pour acheter la propriété");
             }
         } else if (!estProprietaire(joueur)) { // La gare a un propriétaire différent
-            double loyer = calculLoyer();
+            int loyer = calculLoyer();
             joueur.payer(loyer);
             proprietaire.crediter(loyer); // Le propriétaire reçoit le loyer
             System.out.println(joueur.getNom() + " a payé un loyer de " + loyer + " à " + proprietaire.getNom());
@@ -40,16 +40,18 @@ public class Gare extends Propriete {
     }
 
     @Override
-    public double calculLoyer(Des des) {
+    public int calculLoyer(Des des) {
         return 0;
     }
 
     @Override
-    public double calculLoyer() {
+    public int calculLoyer() {
         Observer quartier = getObserveur();
         if (quartier instanceof Quartier) {
             int nbGares = ((Quartier) quartier).getNbProprietesDetenues(this);
-            return 50 * Math.pow(2, nbGares - 1); // Loyer double en fonction des gares détenues
+            double result = 50 * Math.pow(2, nbGares - 1);
+            int resultInt = (int) result;
+            return resultInt; // Loyer int en fonction des gares détenues
         }
         return 0;
     }

@@ -43,5 +43,5 @@ public abstract class EtatRue {
 
 
 
-    public abstract double calculLoyer();
+    public abstract int calculLoyer();
 }
