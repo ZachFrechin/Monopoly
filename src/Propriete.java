@@ -8,6 +8,10 @@ public abstract class Propriete extends Case implements Subject {
         return proprietaire;
     }
 
+    public Quartier getQuartier() {
+        return quartier;
+    }
+
     public void setProprietaire(Personnage proprietaire) {
         this.proprietaire = proprietaire;
     }

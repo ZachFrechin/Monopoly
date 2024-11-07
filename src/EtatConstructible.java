@@ -31,12 +31,11 @@ public class EtatConstructible extends EtatRue {
 
     public void construire(int nbMaison, int nbHotel) {
         if (nbMaison > 0 || nbHotel > 0) {
-            rue.setEtat(new EtatConstruit(rue, nbMaison, nbHotel));
-            notifier();
-            System.out.println("Construction terminée : " + nbMaison + " maisons, " + nbHotel + " hôtel(s).");
+            devientConstruit(nbMaison, nbHotel);
         }
     }
 
+<<<<<<< HEAD
     @Override
     public void construire_maison() {
         if(maison == 4) {
@@ -63,5 +62,11 @@ public class EtatConstructible extends EtatRue {
     @Override
     public int prix_hotel() {
         return rue.getPrix() * this.coeff[hotel];
+=======
+    public void devientConstruit(int nbMaison, int nbHotel) {
+        rue.setEtat(new EtatConstruit(rue, nbMaison, nbHotel));
+        notifier();
+        System.out.println(rue.getNom() + " - Construction terminée : " + nbMaison + " maisons, " + nbHotel + " hôtel(s).");
+>>>>>>> 4eca60b5717764634698c500ac34a19918fe8623
     }
 }

@@ -9,9 +9,9 @@ public class EtatAcheter extends EtatRue {
         System.out.println(joueur.getNom() + " est sur une rue : " + rue.getNom());
         if (!rue.estProprietaire(joueur)) {
             double loyer = calculLoyer();
+            System.out.println(joueur.getNom() + " a payé un loyer de " + loyer + " à " + rue.getProprietaire().getNom());
             joueur.payer(loyer);
             rue.getProprietaire().crediter(loyer);
-            System.out.println(joueur.getNom() + " a payé un loyer de " + loyer + " à " + rue.getProprietaire().getNom());
         } else {
             System.out.println(joueur.getNom() + " est le propriétaire de cette rue.");
         }
@@ -26,6 +26,6 @@ public class EtatAcheter extends EtatRue {
     public void devientConstructible() {
         rue.setEtat(new EtatConstructible(rue));
         notifier();
-        System.out.println("La rue est maintenant constructible.");
+        System.out.println(rue.getNom() + " est maintenant constructible.");
     }
 }

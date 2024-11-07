@@ -11,6 +11,11 @@ public class Des {
         des2 = random.nextInt(6) + 1;
     }
 
+    public void lancerDes(int score) {
+        des1 = score;
+        des2 = 0;
+    }
+
     public int getTotalDes() {
         return des1 + des2;
     }

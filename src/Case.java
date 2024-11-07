@@ -8,6 +8,14 @@ public class Case {
         this.caseSuivante = caseSuivante;
     }
 
+    public Case getCaseSuivante() {
+        return this.caseSuivante;
+    }
+
+    public String getNom() {
+        return this.nom;
+    }
+
     public Case avancer(int nbCase, Personnage joueur) {
         Case currentCase = this;
         for (int i = 0; i < nbCase; i++) {

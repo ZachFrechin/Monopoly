@@ -18,10 +18,9 @@ public class Rue extends Propriete {
     public int getLoyerHotel() {
         return loyerHotel;
     }
-    
-    @Override
-    public void attache(Quartier quartier) {
-        // TODO Auto-generated method stub
+
+    public EtatRue getEtatRue() {
+        return this.etatRue;
     }
 
     public Rue(String nom, int loyer, int prixMaison, int loyerMaison, int loyerHotel) {
@@ -48,7 +47,7 @@ public class Rue extends Propriete {
 
     public void setEtat(EtatRue etat) {
         this.etatRue = etat;
-        notifier(); // Notifie le changement d'état
+        notifier();
     }
 
     @Override

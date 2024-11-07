@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Personnage {
 
@@ -13,20 +14,32 @@ public class Personnage {
         this.position = position;
     }
 
+    // Getters
     public String getNom() {
-        return nom;
+        return this.nom;
+    }
+
+    public List<Propriete> getMesProprietes() {
+        return this.mesProprietes;
+    }
+
+    // Setters
+    public void setPosition(Case caseNouvelle) {
+        this.position = caseNouvelle;
     }
 
     public boolean peutJouer() {
         return argent > 0;
     }
 
-    public List<Propriete> getMesProprietes() {
-        return mesProprietes;
+    public boolean soldeSuffisant(int montant) {
+        // Vérifie si le joueur possède au moins le montant donné
+        return (this.argent >= montant);
     }
 
-    public void setPosition(Case caseNouvelle) {
-        this.position = caseNouvelle;
+    public void construire(Monopoly jeu) {
+        MenuConstruction mc = new MenuConstruction(this);
+        mc.loop(jeu);
     }
 
     public void jouerTour(Des des) {
@@ -37,8 +50,17 @@ public class Personnage {
         position.joueurArrive(this);
     }
 
+    public void jouerTour(Des des, Integer score) {
+        des.lancerDes(score);
+        int deplacement = des.getTotalDes();
+        System.out.println(nom + " se déplace de " + deplacement + " cases");
+        position = position.avancer(deplacement, this);
+        position.joueurArrive(this);
+    }
+
     public boolean proposerAchat(Propriete propriete) {
-        return argent >= propriete.getPrix();
+        MenuAchat ma = new MenuAchat(propriete.getNom());
+        return (ma.getChoix() == 1);
     }
 
     public void payer(double somme) {

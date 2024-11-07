@@ -1,10 +1,11 @@
 public class Gare extends Propriete {
 
-    private int prix = 200;
+    private int prix;
     private String nom;
 
-    public Gare(String nom) {
+    public Gare(String nom, int loyer) {
         this.nom = nom;
+        this.prix = loyer;
     }
 
     @Override
